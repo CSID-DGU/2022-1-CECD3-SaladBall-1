@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+	<link rel="icon" type="image/png" href="http://i.imgur.com/uWgRbjI.png">
+    <link rel="stylesheet" href="style.css">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script language="javascript">
+	$(function(){
+	var $firstMenu = $('nav > ul > li '),
+			$header = $('header');
+	
+	$firstMenu.mouseenter(function(){
+		$header.stop().animate({height:'400px'});
+	})
+	.mouseleave(function(){
+		$header.stop().animate({height:'100px'});
+	});
+
+});
+	</script>
+</head>
+<body>
+<header>
+	<nav>
+			<img src="/assets/img/bg-masthead.jpg", width="15%", height="15%">
+			<li><a href="/game/index.html">Game Start</a></li>
+			<ul class="clearfix">
+				<li><a href="/info/info1.html">정보</a>
+						<ul>
+							<li><a href="/info/info1.html">공지사항</a></li>
+							<li><a href="/info/info2.html">게임 정보</a></li>
+							<li><a href="/info/info3.html">개발자 정보</a></li>
+						</ul>
+				</li>
+				<li><a href="/map/map1.html">맵</a>
+						<ul>
+							<li><a href="/map/map1.html">캠퍼스 맵</a></li>
+							<li><a href="/map/map2.html">트랙</a></li>
+							<li><a href="/map/map3.html">추천 경로</a></li>
+						</ul>
+				</li>
+				<li><a href="/ranking/ranking1.html">순위</a>
+						<ul>
+							<li><a href="/ranking/ranking1.html">전체 순위</a></li>
+							<li><a href="/ranking/ranking1.html">순위 검색</a></li>
+							<li><a href="/ranking/ranking1.html">맵 별 순위</a></li>
+						</ul>
+				</li>
+				<li><a href="/avatar/avatar1.html">아바타</a>
+						<ul>
+							<li><a href="/avatar/avatar1.html">아바타 신청</a></li>
+							<li><a href="/avatar/avatar1.html">자유형</a></li>
+							<li><a href="/avatar/avatar1.html">양식</a></li>
+						</ul>
+				</li>
+			</ul>
+			
+	</nav>
+</header>
+<main>
+	<div class="main_content">
+	<h2>Main title</h2>
+	<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate! Repudiandae ad neque provident accusamus temporibus. Doloribus dolores nisi inventore accusamus aperiam quam ratione minus repudiandae. Rem fuga impedit odio.</p>
+	<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate! Repudiandae ad neque provident accusamus temporibus. Doloribus dolores nisi inventore accusamus aperiam quam ratione minus repudiandae. Rem fuga impedit odio.</p>
+	<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate! Repudiandae ad neque provident accusamus temporibus. Doloribus dolores nisi inventore accusamus aperiam quam ratione minus repudiandae. Rem fuga impedit odio.</p>
+	<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, cupiditate! Repudiandae ad neque provident accusamus temporibus. Doloribus dolores nisi inventore accusamus aperiam quam ratione minus repudiandae. Rem fuga impedit odio.</p>	
+	</div>
+</main>
+</body>
+</html>
