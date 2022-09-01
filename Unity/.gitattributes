@@ -1,0 +1,14 @@
+Packages filter=lfs diff=lfs merge=lfs -text
+build_test filter=lfs diff=lfs merge=lfs -text
+sever_test_BurstDebugInformation_DoNotShip filter=lfs diff=lfs merge=lfs -text
+InitCodeMarker filter=lfs diff=lfs merge=lfs -text
+Library filter=lfs diff=lfs merge=lfs -text
+ProjectSettings filter=lfs diff=lfs merge=lfs -text
+UnityCrashHandler64.exe filter=lfs diff=lfs merge=lfs -text
+sever_test.exe filter=lfs diff=lfs merge=lfs -text
+Assets filter=lfs diff=lfs merge=lfs -text
+Logs filter=lfs diff=lfs merge=lfs -text
+MonoBleedingEdge filter=lfs diff=lfs merge=lfs -text
+sever_test_Data filter=lfs diff=lfs merge=lfs -text
+UnityPlayer.dll filter=lfs diff=lfs merge=lfs -text
+UserSettings filter=lfs diff=lfs merge=lfs -text
