@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Mirror;
 
 public class CreateRoomUI : MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class CreateRoomUI : MonoBehaviour
         GameObject clickObject = EventSystem.current.currentSelectedGameObject;
         // current button value save
         // print(clickObject.name);
+    }
+
+    public void CreateRoom(){
+        var manager = NetworkManager.singleton;
+        // 방 설정 작업 처리
+        //
+        //
+        manager.StartHost();
     }
 }
 
