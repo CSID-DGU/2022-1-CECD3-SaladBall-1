@@ -8,13 +8,38 @@ using Mirror;
 public class CreateRoomUI : MonoBehaviour
 {
     [SerializeField]
-    private List<Button> teamCountButtons;
+    private List<RawImage> avatarImgs;
+
+    [SerializeField]
+    private List<Button> playerCountButtons;
 
     private CreateGameRoomData roomData;
     // Start is called before the first frame update
-    void Start()
-    {
-        roomData = new CreateGameRoomData(){ teamCount = 1 };
+    void Start(){
+        roomData = new CreateGameRoomData(){ playerCount = 10 };
+        UpdateAvatarImages();
+    }
+
+    private void UpdateAvatarImages(){
+        for(int i = 0; i < avatarImgs.Count; i++){
+            if(i < roomData.playerCount){
+                avatarImgs[i].gameObject.SetActive(true);
+            }else{
+                avatarImgs[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void UpdatePlayerCount(int count){
+        roomData.playerCount = count;
+        for(int i = 0; i < playerCountButtons.Count; i++){
+            if(i == count - 4){
+                playerCountButtons[i].image.color = new Color(1f,1f,1f,1f);
+            }else{
+                playerCountButtons[i].image.color = new Color(1f,1f,1f,0f);
+            }
+        }
+        UpdateAvatarImages();
     }
     
     public void ClickBtn(){
@@ -33,5 +58,5 @@ public class CreateRoomUI : MonoBehaviour
 }
 
 public class CreateGameRoomData{
-    public int teamCount;
+    public int playerCount;
 }
