@@ -5041,7 +5041,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1224560753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 615e6c6589cf9e54cad646b5a11e0529, type: 3}
+  m_Script: {fileID: 11500000, guid: d5c2dcfc61923e04884aa35a788060df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
@@ -5052,16 +5052,17 @@ MonoBehaviour:
   onlineScene: Assets/Karting/Scenes/GameRoomScene.unity
   transport: {fileID: 1224560755}
   networkAddress: localhost
-  maxConnections: 100
+  maxConnections: 10
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 5499707829977686047, guid: 1735b933afadcd44586cc4da430a6255,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 4810912518991602691, guid: 19954de30401f73428254541a9ad156e, type: 3}
   showRoomGUI: 1
   minPlayers: 1
-  roomPlayerPrefab: {fileID: 1799042820193028830, guid: 700ebb86743df614c9c9e648a53ab4a0,
+  roomPlayerPrefab: {fileID: 4533850897808406283, guid: 700ebb86743df614c9c9e648a53ab4a0,
     type: 3}
   RoomScene: Assets/Karting/Scenes/GameRoomScene.unity
   GameplayScene: Assets/Karting/Scenes/MainScene.unity
@@ -6640,7 +6641,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 960, y: 540}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

@@ -24,7 +24,7 @@ public class OnlineUI : MonoBehaviour
 
     public void OnClickEnterGameRoomButton(){
         if(nicknameInputField.text != ""){
-            var manager = NetworkManager.singleton;
+            var manager = nrm.singleton;
             manager.StartClient();
         }else{
             nicknameInputField.GetComponent<Animator>().SetTrigger("on");
