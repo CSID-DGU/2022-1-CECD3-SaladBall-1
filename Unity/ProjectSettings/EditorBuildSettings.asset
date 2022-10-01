@@ -9,7 +9,13 @@ EditorBuildSettings:
     path: Assets/Karting/Scenes/IntroMenu.unity
     guid: d29260d8d84c94bd7ac95807b3da99d4
   - enabled: 1
-    path: Assets/Karting/Scenes/MainScene.unity
+    path: Assets/Karting/Scenes/Offline.unity
+    guid: efbab9231f7079742a3974307647f4ab
+  - enabled: 1
+    path: Assets/Karting/Scenes/Lobby.unity
+    guid: 4d3c10dd80017e34aa559412c1009aa3
+  - enabled: 1
+    path: Assets/Karting/Scenes/Game.unity
     guid: 92786e23da2af4a4f8803aaf44c47121
   - enabled: 1
     path: Assets/Karting/Scenes/LoseScene.unity
@@ -17,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Karting/Scenes/WinScene.unity
     guid: d6801f2e59f75ee4b919cf5da4e48e3b
-  - enabled: 1
-    path: Assets/Karting/Scenes/GameRoomScene.unity
-    guid: 4d3c10dd80017e34aa559412c1009aa3
   m_configObjects: {}
