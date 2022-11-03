@@ -5,10 +5,13 @@ using Mirror;
 
 public class FollowPlayer : NetworkBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        if(this.isLocalPlayer){
+        if (this.isServer)
+            return;
+
+        if(this.isLocalPlayer || hasAuthority)
+        {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().m_LookAt = gameObject.transform;
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Follow = gameObject.transform;
         }

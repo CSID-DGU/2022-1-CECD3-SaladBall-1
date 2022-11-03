@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 namespace MirrorBasics {
 
     [RequireComponent (typeof (NetworkMatch))]
-    public class Player : NetworkBehaviour {
+    public class Player : NetworkRoomPlayer {
 
         public static Player localPlayer;
         [SyncVar] public string matchID;
@@ -36,18 +36,32 @@ namespace MirrorBasics {
                 localPlayer = this;
             } else {
                 Debug.Log ($"Spawning other player UI Prefab");
-                playerLobbyUI = UILobby.instance.SpawnPlayerUIPrefab (this);
+
+                if(UILobby.instance)
+                {
+                    playerLobbyUI = UILobby.instance.SpawnPlayerUIPrefab (this);
+                }
             }
         }
 
         public override void OnStopClient () {
-            Debug.Log ($"Client Stopped");
-            ClientDisconnect ();
+            Debug.Log ($"Client Stopped ({NetworkClient.isLoadingScene})");
+
+            ClientDisconnect();
         }
 
-        public override void OnStopServer () {
-            Debug.Log ($"Client Stopped on Server");
-            ServerDisconnect ();
+        public override void OnStopServer () 
+        {
+            Debug.Log($"Current Connections : {NetworkServer.connections.Count}");
+
+            if (NetworkServer.connections.Count <= 0)
+            {
+                NetworkManager.singleton.ServerChangeScene("Lobby");
+            }
+
+            Debug.Log ($"Client Stopped on Server ({NetworkServer.isLoadingScene})");
+
+            ServerDisconnect();
         }
 
         /* 
@@ -77,7 +91,11 @@ namespace MirrorBasics {
             playerIndex = _playerIndex;
             matchID = _matchID;
             Debug.Log ($"MatchID: {matchID} == {_matchID}");
-            UILobby.instance.HostSuccess (success, _matchID);
+
+            if (UILobby.instance)
+            {
+                UILobby.instance.HostSuccess (success, _matchID);
+            }
         }
 
         /* 
@@ -111,7 +129,11 @@ namespace MirrorBasics {
             playerIndex = _playerIndex;
             matchID = _matchID;
             Debug.Log ($"MatchID: {matchID} == {_matchID}");
-            UILobby.instance.JoinSuccess (success, _matchID);
+
+            if(UILobby.instance)
+            {
+                UILobby.instance.JoinSuccess (success, _matchID);
+            }
         }
 
         /* 
@@ -140,8 +162,9 @@ namespace MirrorBasics {
 
         void ClientDisconnect () {
             if (playerLobbyUI != null) {
-                if (!isServer) {
-                    Destroy (playerLobbyUI);
+                if (!isServer && !IsGameScene())
+                {
+                    Destroy(playerLobbyUI);
                 } else {
                     playerLobbyUI.SetActive (false);
                 }
@@ -178,7 +201,11 @@ namespace MirrorBasics {
             playerIndex = _playerIndex;
             matchID = _matchID;
             Debug.Log ($"MatchID: {matchID} == {_matchID} | {success}");
-            UILobby.instance.SearchGameSuccess (success, _matchID);
+
+            if(UILobby.instance)
+            {
+                UILobby.instance.SearchGameSuccess (success, _matchID);
+            }
         }
 
         /* 
@@ -192,6 +219,9 @@ namespace MirrorBasics {
 
         [TargetRpc]
         void TargetPlayerCountUpdated (int playerCount) {
+            if (!UILobby.instance)
+                return;
+
             if (playerCount > 1) {
                 UILobby.instance.SetStartButtonActive(true);
             } else {
@@ -204,7 +234,7 @@ namespace MirrorBasics {
         */
 
         public void BeginGame () {
-            CmdBeginGame ();
+            CmdBeginGame();
         }
 
         [Command]
@@ -221,8 +251,26 @@ namespace MirrorBasics {
         void TargetBeginGame () {
             Debug.Log ($"MatchID: {matchID} | Beginning");
             //Additively load game scene
-            SceneManager.LoadScene (3, LoadSceneMode.Additive);
+            //NetworkManager.singleton.ServerChangeScene("Game");
+            //SceneManager.LoadScene (3, LoadSceneMode.Additive);
+            CmdSceneChange();
         }
 
+        [Command]
+        void CmdSceneChange()
+        {
+            SceneChange();
+        }
+
+        [Server]
+        void SceneChange()
+        {
+            NetworkManager.singleton.ServerChangeScene("Game");
+        }
+
+        public bool IsGameScene()
+        {
+            return (SceneManager.GetActiveScene().name == NetworkManager.singleton.onlineScene);
+        }
     }
 }

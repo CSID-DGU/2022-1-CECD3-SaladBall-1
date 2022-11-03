@@ -22,7 +22,10 @@ namespace KartGame.KartSystems {
 
         private void Update()
         {
-            if (this.isLocalPlayer)
+            if (this.isServer)
+                return;
+
+            if (this.isLocalPlayer || hasAuthority)
             {
                 xVal = Input.GetAxis("Horizontal");
                 goButton = Input.GetButton(AccelerateButtonName);

@@ -193,7 +193,8 @@ namespace Mirror
                 return;
 
             // replace room player with game player
-            NetworkServer.ReplacePlayerForConnection(conn, gamePlayer, true);
+            //NetworkServer.ReplacePlayerForConnection(conn, gamePlayer, true);
+            NetworkServer.Spawn(gamePlayer, conn);
         }
 
         /// <summary>
