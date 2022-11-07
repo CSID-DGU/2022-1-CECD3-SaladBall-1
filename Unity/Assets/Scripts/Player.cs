@@ -13,6 +13,7 @@ namespace MirrorBasics {
         public static Player localPlayer;
         [SyncVar] public string matchID;
         [SyncVar] public int playerIndex;
+        [SyncVar] public string playerName;
 
         NetworkMatch networkMatch;
 
@@ -68,29 +69,31 @@ namespace MirrorBasics {
             HOST MATCH
         */
 
-        public void HostGame (bool publicMatch) {
+        public void HostGame (bool publicMatch, string nickname) {
             string matchID = MatchMaker.GetRandomMatchID ();
-            CmdHostGame (matchID, publicMatch);
+            CmdHostGame (matchID, publicMatch, nickname);
         }
 
         [Command]
-        void CmdHostGame (string _matchID, bool publicMatch) {
+        void CmdHostGame (string _matchID, bool publicMatch, string _nickname) {
             matchID = _matchID;
+            playerName = _nickname;
             if (MatchMaker.instance.HostGame (_matchID, this, publicMatch, out playerIndex)) {
-                Debug.Log ($"Game hosted successfully");
+                Debug.Log ($"Game hosted successfully, {playerName}");
                 networkMatch.matchId = _matchID.ToGuid ();
-                TargetHostGame (true, _matchID, playerIndex);
+                TargetHostGame (true, _matchID, playerIndex, _nickname);
             } else {
                 Debug.Log ($"Game hosted failed");
-                TargetHostGame (false, _matchID, playerIndex);
+                TargetHostGame (false, _matchID, playerIndex, _nickname);
             }
         }
 
         [TargetRpc]
-        void TargetHostGame (bool success, string _matchID, int _playerIndex) {
+        void TargetHostGame (bool success, string _matchID, int _playerIndex, string _playerName) {
             playerIndex = _playerIndex;
             matchID = _matchID;
-            Debug.Log ($"MatchID: {matchID} == {_matchID}");
+            playerName = _playerName;
+            Debug.Log ($"MatchID: {matchID} == {_matchID}, {playerName}");
 
             if (UILobby.instance)
             {
@@ -102,17 +105,18 @@ namespace MirrorBasics {
             JOIN MATCH
         */
 
-        public void JoinGame (string _inputID) {
-            CmdJoinGame (_inputID);
+        public void JoinGame (string _inputID, string nickname) {
+            CmdJoinGame (_inputID, nickname);
         }
 
         [Command]
-        void CmdJoinGame (string _matchID) {
+        void CmdJoinGame (string _matchID, string _nickname) {
             matchID = _matchID;
+            playerName = _nickname;
             if (MatchMaker.instance.JoinGame (_matchID, this, out playerIndex)) {
                 Debug.Log ($"Game Joined successfully");
                 networkMatch.matchId = _matchID.ToGuid ();
-                TargetJoinGame (true, _matchID, playerIndex);
+                TargetJoinGame (true, _matchID, playerIndex, _nickname);
 
                 //Host
                 if (isServer && playerLobbyUI != null) {
@@ -120,14 +124,15 @@ namespace MirrorBasics {
                 }
             } else {
                 Debug.Log ($"Game Joined failed");
-                TargetJoinGame (false, _matchID, playerIndex);
+                TargetJoinGame (false, _matchID, playerIndex, _nickname);
             }
         }
 
         [TargetRpc]
-        void TargetJoinGame (bool success, string _matchID, int _playerIndex) {
+        void TargetJoinGame (bool success, string _matchID, int _playerIndex, string _playerName) {
             playerIndex = _playerIndex;
             matchID = _matchID;
+            playerName = _playerName;
             Debug.Log ($"MatchID: {matchID} == {_matchID}");
 
             if(UILobby.instance)
@@ -175,16 +180,17 @@ namespace MirrorBasics {
             SEARCH MATCH
         */
 
-        public void SearchGame () {
-            CmdSearchGame ();
+        public void SearchGame (string nickname) {
+            CmdSearchGame (nickname);
         }
 
         [Command]
-        void CmdSearchGame () {
+        void CmdSearchGame (string _nickname) {
             if (MatchMaker.instance.SearchGame (this, out playerIndex, out matchID)) {
                 Debug.Log ($"Game Found Successfully");
                 networkMatch.matchId = matchID.ToGuid ();
-                TargetSearchGame (true, matchID, playerIndex);
+                playerName = _nickname;
+                TargetSearchGame (true, matchID, playerIndex, _nickname);
 
                 //Host
                 if (isServer && playerLobbyUI != null) {
@@ -192,14 +198,15 @@ namespace MirrorBasics {
                 }
             } else {
                 Debug.Log ($"Game Search Failed");
-                TargetSearchGame (false, matchID, playerIndex);
+                TargetSearchGame (false, matchID, playerIndex, _nickname);
             }
         }
 
         [TargetRpc]
-        void TargetSearchGame (bool success, string _matchID, int _playerIndex) {
+        void TargetSearchGame (bool success, string _matchID, int _playerIndex, string _playerName) {
             playerIndex = _playerIndex;
             matchID = _matchID;
+            playerName = _playerName;
             Debug.Log ($"MatchID: {matchID} == {_matchID} | {success}");
 
             if(UILobby.instance)

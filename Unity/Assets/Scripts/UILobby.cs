@@ -36,7 +36,10 @@ namespace MirrorBasics {
             beginGameButton.SetActive (active);
         }
 
+        public static string Name{ get; private set; }
+
         public void Nickname(){
+            Name = nicknameInput.text;
             nicknameCanvas.enabled = false;
             connectCanvas.enabled = true;
         }
@@ -44,13 +47,13 @@ namespace MirrorBasics {
         public void HostPublic () {
             lobbySelectables.ForEach (x => x.interactable = false);
 
-            Player.localPlayer.HostGame (true);
+            Player.localPlayer.HostGame (true, Name);
         }
 
         public void HostPrivate () {
             lobbySelectables.ForEach (x => x.interactable = false);
 
-            Player.localPlayer.HostGame (false);
+            Player.localPlayer.HostGame (false, Name);
         }
 
         public void HostSuccess (bool success, string matchID) {
@@ -68,7 +71,7 @@ namespace MirrorBasics {
         public void Join () {
             lobbySelectables.ForEach (x => x.interactable = false);
 
-            Player.localPlayer.JoinGame (joinMatchInput.text.ToUpper ());
+            Player.localPlayer.JoinGame (joinMatchInput.text.ToUpper (), Name);
         }
 
         public void JoinSuccess (bool success, string matchID) {
@@ -131,7 +134,7 @@ namespace MirrorBasics {
                     currentTime -= Time.deltaTime;
                 } else {
                     currentTime = searchInterval;
-                    Player.localPlayer.SearchGame ();
+                    Player.localPlayer.SearchGame (Name);
                 }
                 yield return null;
             }
