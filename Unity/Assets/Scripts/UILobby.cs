@@ -12,7 +12,10 @@ namespace MirrorBasics {
 
         [Header ("Host Join")]
         [SerializeField] InputField joinMatchInput;
+        [SerializeField] InputField nicknameInput;
         [SerializeField] List<Selectable> lobbySelectables = new List<Selectable> ();
+        [SerializeField] Canvas nicknameCanvas;
+        [SerializeField] Canvas connectCanvas;
         [SerializeField] Canvas lobbyCanvas;
         [SerializeField] Canvas searchCanvas;
         bool searching = false;
@@ -31,6 +34,11 @@ namespace MirrorBasics {
 
         public void SetStartButtonActive (bool active) {
             beginGameButton.SetActive (active);
+        }
+
+        public void Nickname(){
+            nicknameCanvas.enabled = false;
+            connectCanvas.enabled = true;
         }
 
         public void HostPublic () {
