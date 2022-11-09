@@ -240,43 +240,42 @@ namespace MirrorBasics {
             BEGIN MATCH
         */
 
-        public void BeginGame () {
-            CmdBeginGame();
+        public void BeginGame (int mode) {
+            Debug.Log($"BeginGame : {mode}");
+            CmdBeginGame(mode);
         }
 
         [Command]
-        void CmdBeginGame () {
-            MatchMaker.instance.BeginGame (matchID);
+        void CmdBeginGame (int _mode) {
+            MatchMaker.instance.BeginGame (matchID, _mode);
             Debug.Log ($"Game Beginning");
         }
 
-        public void StartGame () { //Server
-            TargetBeginGame ();
+        public void StartGame (int _mode) { //Server
+            Debug.Log($"StartGame : {_mode}");
+            TargetBeginGame (_mode);
         }
 
         [TargetRpc]
-        void TargetBeginGame () {
+        void TargetBeginGame (int _mode) {
             Debug.Log ($"MatchID: {matchID} | Beginning");
-            //Additively load game scene
-            //NetworkManager.singleton.ServerChangeScene("Game");
-            //SceneManager.LoadScene (3, LoadSceneMode.Additive);
-            CmdSceneChange();
+            CmdSceneChange(_mode);
         }
 
         [Command]
-        void CmdSceneChange()
-        {
-            SceneChange();
+        void CmdSceneChange(int _mode){
+            Debug.Log($"SceneChange : {_mode}");
+            SceneChange(_mode);
         }
 
         [Server]
-        void SceneChange()
-        {
-            NetworkManager.singleton.ServerChangeScene("Game");
+        void SceneChange(int _mode){
+            string gameSceneName = "Game" + _mode.ToString();
+            Debug.Log($"GameScene : {gameSceneName}");
+            NetworkManager.singleton.ServerChangeScene(gameSceneName);
         }
 
-        public bool IsGameScene()
-        {
+        public bool IsGameScene(){
             return (SceneManager.GetActiveScene().name == NetworkManager.singleton.onlineScene);
         }
     }

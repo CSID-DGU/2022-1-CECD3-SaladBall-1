@@ -106,12 +106,13 @@ namespace MirrorBasics {
             return false;
         }
 
-        public void BeginGame (string _matchID) {
+        public void BeginGame (string _matchID, int _mode) {
             for (int i = 0; i < matches.Count; i++) {
                 if (matches[i].matchID == _matchID) {
                     matches[i].inMatch = true;
                     foreach (var player in matches[i].players) {
-                        player.StartGame ();
+                        player.StartGame (_mode);
+                        Debug.Log($"MatchMaker BeginGame : {_mode}");
                     }
                     break;
                 }

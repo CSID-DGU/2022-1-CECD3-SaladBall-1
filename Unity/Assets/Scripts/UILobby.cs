@@ -24,7 +24,10 @@ namespace MirrorBasics {
         [SerializeField] Transform UIPlayerParent;
         [SerializeField] GameObject UIPlayerPrefab;
         [SerializeField] Text matchIDText;
+        [SerializeField] Dropdown modeMenu;
+        [SerializeField] GameObject modeBack;
         [SerializeField] GameObject beginGameButton;
+        [SerializeField] List<Sprite> lobbySprite = new List<Sprite> ();
 
         GameObject localPlayerLobbyUI;
 
@@ -34,6 +37,7 @@ namespace MirrorBasics {
 
         public void SetStartButtonActive (bool active) {
             beginGameButton.SetActive (active);
+            modeBack.SetActive(active);
         }
 
         public static string Name{ get; private set; }
@@ -103,7 +107,8 @@ namespace MirrorBasics {
         }
 
         public void BeginGame () {
-            Player.localPlayer.BeginGame ();
+            Debug.Log(modeMenu.value);
+            Player.localPlayer.BeginGame (modeMenu.value);
         }
 
         public void SearchGame () {

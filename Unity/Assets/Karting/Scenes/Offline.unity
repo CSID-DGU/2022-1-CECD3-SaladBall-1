@@ -360,7 +360,7 @@ MonoBehaviour:
   roomPlayerPrefab: {fileID: -3963296349262182241, guid: 538ed424e82aca1459887b92eb7bcf3d,
     type: 3}
   RoomScene: Assets/Karting/Scenes/Lobby.unity
-  GameplayScene: Assets/Karting/Scenes/Game.unity
+  GameplayScene: Assets/Karting/Scenes/Game0.unity
   _allPlayersReady: 0
   roomSlots: []
   clientIndex: 0
