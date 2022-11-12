@@ -241,7 +241,6 @@ namespace MirrorBasics {
         */
 
         public void BeginGame (int mode) {
-            Debug.Log($"BeginGame : {mode}");
             CmdBeginGame(mode);
         }
 
@@ -252,7 +251,6 @@ namespace MirrorBasics {
         }
 
         public void StartGame (int _mode) { //Server
-            Debug.Log($"StartGame : {_mode}");
             TargetBeginGame (_mode);
         }
 
@@ -264,7 +262,6 @@ namespace MirrorBasics {
 
         [Command]
         void CmdSceneChange(int _mode){
-            Debug.Log($"SceneChange : {_mode}");
             SceneChange(_mode);
         }
 

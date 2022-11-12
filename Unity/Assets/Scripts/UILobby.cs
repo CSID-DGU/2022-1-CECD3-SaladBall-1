@@ -28,11 +28,16 @@ namespace MirrorBasics {
         [SerializeField] GameObject modeBack;
         [SerializeField] GameObject beginGameButton;
         [SerializeField] List<Sprite> lobbySprite = new List<Sprite> ();
+        [SerializeField] Image avatarImage;
+        int avatarcnt;
 
         GameObject localPlayerLobbyUI;
 
         void Start () {
             instance = this;
+            avatarcnt = 0;
+            avatarImage.sprite = lobbySprite[avatarcnt];
+            Debug.Log ($"start : sprite array ({lobbySprite.Count}), avatarcnt : ({avatarcnt})");
         }
 
         public void SetStartButtonActive (bool active) {
@@ -46,6 +51,18 @@ namespace MirrorBasics {
             Name = nicknameInput.text;
             nicknameCanvas.enabled = false;
             connectCanvas.enabled = true;
+        }
+
+        public void leftAvatar(){
+            avatarcnt = (avatarcnt - 1 + lobbySprite.Count) % lobbySprite.Count;
+            Debug.Log ($"left : sprite array ({lobbySprite.Count}), avatarcnt : ({avatarcnt})");
+            avatarImage.sprite = lobbySprite[avatarcnt];
+        }
+
+        public void rightAvatar(){
+            avatarcnt = (avatarcnt + 1 + lobbySprite.Count) % lobbySprite.Count;
+            Debug.Log ($"right : sprite array ({lobbySprite.Count}), avatarcnt : ({avatarcnt})");
+            avatarImage.sprite = lobbySprite[avatarcnt];
         }
 
         public void HostPublic () {
