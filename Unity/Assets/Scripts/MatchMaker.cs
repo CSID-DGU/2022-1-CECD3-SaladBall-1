@@ -112,7 +112,6 @@ namespace MirrorBasics {
                     matches[i].inMatch = true;
                     foreach (var player in matches[i].players) {
                         player.StartGame (_mode);
-                        Debug.Log($"MatchMaker BeginGame : {_mode}");
                     }
                     break;
                 }

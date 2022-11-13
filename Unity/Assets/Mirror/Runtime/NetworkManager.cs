@@ -76,6 +76,7 @@ namespace Mirror
         [Header("Player Object")]
         [FormerlySerializedAs("m_PlayerPrefab")]
         [Tooltip("Prefab of the player object. Prefab must have a Network Identity component. May be an empty game object or a full avatar.")]
+        public List<GameObject> playerPrefabs = new List<GameObject>();
         public GameObject playerPrefab;
 
         /// <summary>Enable to automatically create player objects on connect and on scene change.</summary>

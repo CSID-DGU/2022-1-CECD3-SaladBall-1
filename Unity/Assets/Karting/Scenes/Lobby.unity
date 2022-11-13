@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2836173}
   m_Layer: 5
-  m_Name: SelectAvatar
+  m_Name: SelectKart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -609,7 +609,8 @@ MonoBehaviour:
   beginGameButton: {fileID: 516270590}
   lobbySprite:
   - {fileID: 21300000, guid: ffd276dc34b3a7d44a95ae4f504e6969, type: 3}
-  - {fileID: 21300000, guid: 905dbf2878b873646a4db1048d76bd1e, type: 3}
+  - {fileID: 21300000, guid: d95bcf65c16e418429f90ede56daedb5, type: 3}
+  kartImage: {fileID: 1628228434}
 --- !u!1 &152005152
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,8 +2716,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 74940727}
-        m_TargetAssemblyTypeName: MirrorBasics.UILobby, KartGame
-        m_MethodName: 
+        m_TargetAssemblyTypeName: MirrorBasics.UILobby, Assembly-CSharp
+        m_MethodName: leftAvatar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3351,8 +3352,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 74940727}
-        m_TargetAssemblyTypeName: MirrorBasics.UILobby, KartGame
-        m_MethodName: 
+        m_TargetAssemblyTypeName: MirrorBasics.UILobby, Assembly-CSharp
+        m_MethodName: rightAvatar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6494,7 +6495,7 @@ GameObject:
   - component: {fileID: 1628228435}
   - component: {fileID: 1628228434}
   m_Layer: 5
-  m_Name: Avatar
+  m_Name: KartImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6540,7 +6541,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ffd276dc34b3a7d44a95ae4f504e6969, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

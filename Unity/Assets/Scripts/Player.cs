@@ -14,6 +14,7 @@ namespace MirrorBasics {
         [SyncVar] public string matchID;
         [SyncVar] public int playerIndex;
         [SyncVar] public string playerName;
+        
 
         NetworkMatch networkMatch;
 
@@ -268,12 +269,32 @@ namespace MirrorBasics {
         [Server]
         void SceneChange(int _mode){
             string gameSceneName = "Game" + _mode.ToString();
-            Debug.Log($"GameScene : {gameSceneName}");
+            Debug.Log($"GameScene : {gameSceneName}, kartNum : {kartNum}");
             NetworkManager.singleton.ServerChangeScene(gameSceneName);
         }
 
         public bool IsGameScene(){
             return (SceneManager.GetActiveScene().name == NetworkManager.singleton.onlineScene);
+        }
+
+        /* 
+            GET KART NUM
+        */
+        public void GetKart(int _kartNum){
+            CmdGetKart(_kartNum);
+        }
+
+        [Command]
+        void CmdGetKart(int _kartNum){
+            kartNum = _kartNum;
+            Debug.Log($"cmdGetKart : kartNum : {kartNum}");
+            RpcGetKart(kartNum);
+        }
+
+        [ClientRpc]
+        void RpcGetKart(int _kartNum){
+            kartNum = _kartNum;
+            Debug.Log($"RpcGetKart : kartNum : {kartNum}");
         }
     }
 }

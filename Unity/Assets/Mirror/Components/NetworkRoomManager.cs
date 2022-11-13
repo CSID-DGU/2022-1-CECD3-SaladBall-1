@@ -182,11 +182,13 @@ namespace Mirror
             GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
             if (gamePlayer == null)
             {
+                int kartNum = roomPlayer.GetComponent<NetworkRoomPlayer>().kartNum;
+                Debug.Log($"SceneLoadedForPlayer : {roomPlayer.GetComponent<NetworkRoomPlayer>()} | kartNum : {kartNum}");
                 // get start position from base class
                 Transform startPos = GetStartPosition();
                 gamePlayer = startPos != null
-                    ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-                    : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+                    ? Instantiate(playerPrefabs[kartNum], startPos.position, startPos.rotation)
+                    : Instantiate(playerPrefabs[kartNum], Vector3.zero, Quaternion.identity);
             }
 
             if (!OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer))
@@ -335,8 +337,9 @@ namespace Mirror
 
                 NetworkServer.AddPlayerForConnection(conn, newRoomGameObject);
             }
-            else
+            else {
                 OnRoomServerAddPlayer(conn);
+            }
         }
 
         [Server]

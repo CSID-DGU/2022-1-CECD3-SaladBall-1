@@ -28,16 +28,16 @@ namespace MirrorBasics {
         [SerializeField] GameObject modeBack;
         [SerializeField] GameObject beginGameButton;
         [SerializeField] List<Sprite> lobbySprite = new List<Sprite> ();
-        [SerializeField] Image avatarImage;
-        int avatarcnt;
+        [SerializeField] Image kartImage;
+        int kartNum;
 
         GameObject localPlayerLobbyUI;
 
         void Start () {
             instance = this;
-            avatarcnt = 0;
-            avatarImage.sprite = lobbySprite[avatarcnt];
-            Debug.Log ($"start : sprite array ({lobbySprite.Count}), avatarcnt : ({avatarcnt})");
+            kartNum = 0;
+            kartImage.sprite = lobbySprite[kartNum];
+            Debug.Log ($"start : sprite array ({lobbySprite.Count}), kartNum : ({kartNum})");
         }
 
         public void SetStartButtonActive (bool active) {
@@ -54,15 +54,17 @@ namespace MirrorBasics {
         }
 
         public void leftAvatar(){
-            avatarcnt = (avatarcnt - 1 + lobbySprite.Count) % lobbySprite.Count;
-            Debug.Log ($"left : sprite array ({lobbySprite.Count}), avatarcnt : ({avatarcnt})");
-            avatarImage.sprite = lobbySprite[avatarcnt];
+            kartNum = (kartNum - 1 + lobbySprite.Count) % lobbySprite.Count;
+            Debug.Log ($"left : sprite array ({lobbySprite.Count}), kartNum : ({kartNum})");
+            kartImage.sprite = lobbySprite[kartNum];
+            Player.localPlayer.GetKart(kartNum);
         }
 
         public void rightAvatar(){
-            avatarcnt = (avatarcnt + 1 + lobbySprite.Count) % lobbySprite.Count;
-            Debug.Log ($"right : sprite array ({lobbySprite.Count}), avatarcnt : ({avatarcnt})");
-            avatarImage.sprite = lobbySprite[avatarcnt];
+            kartNum = (kartNum + 1 + lobbySprite.Count) % lobbySprite.Count;
+            Debug.Log ($"right : sprite array ({lobbySprite.Count}), kartNum : ({kartNum})");
+            kartImage.sprite = lobbySprite[kartNum];
+            Player.localPlayer.GetKart(kartNum);
         }
 
         public void HostPublic () {
@@ -124,8 +126,7 @@ namespace MirrorBasics {
         }
 
         public void BeginGame () {
-            Debug.Log(modeMenu.value);
-            Player.localPlayer.BeginGame (modeMenu.value);
+            Player.localPlayer.BeginGame(modeMenu.value);
         }
 
         public void SearchGame () {

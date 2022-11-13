@@ -35,6 +35,7 @@ namespace Mirror
         [Tooltip("Diagnostic index of the player, e.g. Player1, Player2, etc.")]
         [SyncVar(hook = nameof(IndexChanged))]
         public int index;
+        [SyncVar] public int kartNum;
 
         #region Unity Callbacks
 
