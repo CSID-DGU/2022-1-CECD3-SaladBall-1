@@ -351,14 +351,16 @@ MonoBehaviour:
   maxConnections: 10
   authenticator: {fileID: 0}
   playerPrefabs:
-  - {fileID: 2948045114623813003, guid: 34b1c745a236d964b814bf4024cf05d0, type: 3}
   - {fileID: 5499707829977686047, guid: eed2fc9205e408a46806f930c4dddbf8, type: 3}
+  - {fileID: 2948045114623813003, guid: 34b1c745a236d964b814bf4024cf05d0, type: 3}
+  - {fileID: 2948045114623813003, guid: 5247ff63ff727c149a26d84fd56c397f, type: 3}
   playerPrefab: {fileID: 5499707829977686047, guid: eed2fc9205e408a46806f930c4dddbf8,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 2948045114623813003, guid: 34b1c745a236d964b814bf4024cf05d0, type: 3}
+  - {fileID: 2948045114623813003, guid: 5247ff63ff727c149a26d84fd56c397f, type: 3}
   showRoomGUI: 0
   minPlayers: 1
   roomPlayerPrefab: {fileID: -3963296349262182241, guid: 538ed424e82aca1459887b92eb7bcf3d,

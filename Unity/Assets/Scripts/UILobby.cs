@@ -29,6 +29,7 @@ namespace MirrorBasics {
         [SerializeField] GameObject beginGameButton;
         [SerializeField] List<Sprite> lobbySprite = new List<Sprite> ();
         [SerializeField] Image kartImage;
+        [SerializeField] Text kartText;
         int kartNum;
 
         GameObject localPlayerLobbyUI;
@@ -57,6 +58,7 @@ namespace MirrorBasics {
             kartNum = (kartNum - 1 + lobbySprite.Count) % lobbySprite.Count;
             Debug.Log ($"left : sprite array ({lobbySprite.Count}), kartNum : ({kartNum})");
             kartImage.sprite = lobbySprite[kartNum];
+            kartText.text = lobbySprite[kartNum].name;
             Player.localPlayer.GetKart(kartNum);
         }
 
@@ -64,6 +66,7 @@ namespace MirrorBasics {
             kartNum = (kartNum + 1 + lobbySprite.Count) % lobbySprite.Count;
             Debug.Log ($"right : sprite array ({lobbySprite.Count}), kartNum : ({kartNum})");
             kartImage.sprite = lobbySprite[kartNum];
+            kartText.text = lobbySprite[kartNum].name;
             Player.localPlayer.GetKart(kartNum);
         }
 
