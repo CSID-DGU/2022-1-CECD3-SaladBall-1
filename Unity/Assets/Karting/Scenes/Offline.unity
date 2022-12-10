@@ -347,7 +347,7 @@ MonoBehaviour:
   offlineScene: Assets/Karting/Scenes/Offline.unity
   onlineScene: Assets/Karting/Scenes/Lobby.unity
   transport: {fileID: 871163778}
-  networkAddress: 13.125.221.18
+  networkAddress: 54.180.32.203
   maxConnections: 10
   authenticator: {fileID: 0}
   playerPrefabs:
